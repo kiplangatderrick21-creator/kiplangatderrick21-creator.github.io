@@ -37,9 +37,10 @@ jobs:
       - name: Build static site
         run: npm run build
         env:
-          # Public contact endpoint (optional). Set it under
+          # Public contact endpoint override (optional). Set it under
           # Settings -> Secrets and variables -> Actions -> Variables.
-          # Empty means the contact form shows its "not connected" notice.
+          # Empty means the form posts to /api/contact, which only exists on
+          # Cloudflare Pages, since GitHub Pages cannot run Functions.
           NEXT_PUBLIC_CONTACT_ENDPOINT: ${{ vars.NEXT_PUBLIC_CONTACT_ENDPOINT }}
 
       - name: Configure Pages

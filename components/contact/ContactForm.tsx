@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { gmailComposeHref, mailtoHref } from '@/lib/email';
+import { site } from '@/lib/site';
 
 type FormFields = {
   name: string;
@@ -9,15 +11,19 @@ type FormFields = {
   organization: string;
   subject: string;
   message: string;
+  // Honeypot: hidden from people, tempting to bots. Sent but never shown.
+  company: string;
 };
 
 type FieldErrors = Partial<Record<keyof FormFields, string>>;
-type Status = 'idle' | 'submitting' | 'success' | 'error' | 'not-configured';
+type Status = 'idle' | 'submitting' | 'success' | 'error' | 'not-connected';
 
-// Connect a form service (Formspree, Basin, or your own API/Worker) by setting
-// NEXT_PUBLIC_CONTACT_ENDPOINT. When it is unset, the form does not submit and
-// shows a clear "not connected" notice instead of pretending to send.
-const endpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
+// Messages are delivered by the Cloudflare Pages Function at /api/contact,
+// which emails each submission to info@nivavale.com (see
+// functions/api/contact.ts). Set NEXT_PUBLIC_CONTACT_ENDPOINT to use an
+// external form service instead, for example
+// NEXT_PUBLIC_CONTACT_ENDPOINT="https://formspree.io/f/your-form-id".
+const endpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT?.trim() || '/api/contact';
 
 const emptyForm: FormFields = {
   name: '',
@@ -25,12 +31,43 @@ const emptyForm: FormFields = {
   organization: '',
   subject: '',
   message: '',
+  company: '',
 };
 
 const inputClass =
   'w-full rounded-sm border border-ink-300 bg-white px-4 py-3 text-ink-900 placeholder:text-ink-400 focus:border-accent';
 
 const errorClass = 'mt-1.5 text-sm text-red-600';
+
+const inlineLinkClass = 'font-medium text-accent-600 transition-colors hover:text-accent';
+
+/**
+ * Direct-email fallback shown whenever the form cannot deliver. mailto: works
+ * when the device has a mail client; the Gmail link covers the devices where it
+ * does not, so the visitor is always redirected somewhere they can send from.
+ */
+function DirectEmailLinks() {
+  if (!site.email) return null;
+  return (
+    <>
+      {' '}
+      You can email{' '}
+      <a href={mailtoHref()} className={inlineLinkClass}>
+        {site.email}
+      </a>{' '}
+      directly, or{' '}
+      <a
+        href={gmailComposeHref()}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={inlineLinkClass}
+      >
+        write from Gmail
+      </a>
+      .
+    </>
+  );
+}
 
 export default function ContactForm() {
   const [form, setForm] = useState<FormFields>(emptyForm);
@@ -60,11 +97,6 @@ export default function ContactForm() {
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    if (!endpoint) {
-      setStatus('not-configured');
-      return;
-    }
-
     setStatus('submitting');
     try {
       const response = await fetch(endpoint, {
@@ -72,6 +104,11 @@ export default function ContactForm() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(form),
       });
+      if (response.status === 503) {
+        // The endpoint is deployed but no email provider is configured yet.
+        setStatus('not-connected');
+        return;
+      }
       if (!response.ok) {
         throw new Error(`Request failed with status ${response.status}`);
       }
@@ -186,9 +223,10 @@ export default function ContactForm() {
       </div>
 
       <div aria-live="polite" role="status">
-        {status === 'not-configured' && (
+        {status === 'not-connected' && (
           <p className="rounded-sm border border-ink-200 bg-paper-muted px-4 py-3 text-sm text-ink-700">
-            This contact form is not yet connected to a delivery service.
+            This form is not connected to an email service yet.
+            <DirectEmailLinks />
           </p>
         )}
         {status === 'success' && (
@@ -199,8 +237,24 @@ export default function ContactForm() {
         {status === 'error' && (
           <p className="rounded-sm border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
             Something went wrong sending your message. Please try again.
+            <DirectEmailLinks />
           </p>
         )}
+      </div>
+
+      {/* Honeypot: invisible to people and to assistive technology. The Pages
+          Function drops any submission that fills it in. */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="contact-company">Company</label>
+        <input
+          id="contact-company"
+          name="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.company}
+          onChange={(e) => update('company', e.target.value)}
+        />
       </div>
 
       <div>

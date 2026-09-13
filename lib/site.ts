@@ -10,9 +10,10 @@ export const site = {
     'Nivavale is a quantitative intelligence and technology firm focused on quantitative research, financial analytics, data, algorithmic systems, alpha research, and quantitative education.',
   // TODO: replace with your production domain before launch.
   url: 'https://nivavale.com',
-  // TODO: set to your real contact email, e.g. 'hello@nivavale.com'.
-  // When null, email links are hidden automatically across the site.
-  email: null as string | null,
+  // Professional contact address. It is shown in the footer and on the contact
+  // page, and it is the delivery address for the contact form (see
+  // functions/api/contact.ts). When null, email links are hidden site-wide.
+  email: 'info@nivavale.com' as string | null,
 };
 
 export type NavItem = { label: string; href: string };

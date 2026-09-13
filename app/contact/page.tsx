@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { site } from '@/lib/site';
 import ContactForm from '@/components/contact/ContactForm';
+import EmailActions from '@/components/contact/EmailActions';
 import Container from '@/components/layout/Container';
-import { Mail } from '@/components/ui/Icon';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -33,13 +33,7 @@ export default function ContactPage() {
               Use the form to send us a message, or reach out directly by email.
             </p>
             {site.email ? (
-              <a
-                href={`mailto:${site.email}`}
-                className="mt-6 inline-flex items-center gap-2 text-base font-medium text-accent-600 transition-colors hover:text-accent"
-              >
-                <Mail className="h-5 w-5" />
-                {site.email}
-              </a>
+              <EmailActions />
             ) : (
               <p className="mt-6 text-sm text-ink-500">
                 Direct contact details will be published here soon.

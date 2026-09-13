@@ -1,0 +1,32 @@
+# ---------------------------------------------------------------------------
+# Nivavale — local environment for Cloudflare Pages Functions (example)
+#
+# These variables are read by functions/api/contact.ts only. They are not
+# available to the Next.js build, so they are kept separate from .env.local.
+#
+# Local use:
+#     copy .dev.vars.example .dev.vars
+#     npm run build
+#     npx wrangler pages dev out
+#
+# Deployed use: set the same names in the Cloudflare dashboard under
+#     Workers & Pages -> <project> -> Settings -> Variables and Secrets
+# and mark RESEND_API_KEY as a secret (encrypted), for both Production and
+# Preview. Never commit .dev.vars — it is gitignored.
+# ---------------------------------------------------------------------------
+
+# Resend API key used to deliver contact-form messages.
+# Create one at https://resend.com/api-keys after verifying nivavale.com.
+# RESEND_API_KEY="re_xxxxxxxxxxxxxxxxxxxxxxxx"
+
+# Where contact-form messages are delivered. Default: info@nivavale.com
+# CONTACT_TO="info@nivavale.com"
+
+# The From header. Must be an address on a domain verified with Resend.
+# Default: Nivavale Website <info@nivavale.com>
+# CONTACT_FROM="Nivavale Website <info@nivavale.com>"
+
+# Optional: allow one extra origin to POST to /api/contact, for example when
+# the static site is served from GitHub Pages and the function runs on
+# Cloudflare Pages. Same-origin requests work without this.
+# ALLOWED_ORIGIN="https://kiplangatderrick21-creator.github.io"
