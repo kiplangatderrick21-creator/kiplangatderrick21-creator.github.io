@@ -61,3 +61,51 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Why this check exists
+      # ---------------------
+      # GitHub Pages can be configured to build from the branch (Settings ->
+      # Pages -> Build and deployment -> Source = "Deploy from a branch"). In
+      # that mode GitHub runs its own Jekyll deployment on every push, so two
+      # deployments race and whichever lands last is what visitors see. When the
+      # branch deployment wins, the site reverts to the rendered README instead
+      # of the built site.
+      #
+      # Setting Source to "GitHub Actions" removes the competing deployment and
+      # makes this check a no-op. Until then, the check detects the wrong content
+      # and re-asserts this deployment, which creates a newer deployment and
+      # therefore wins.
+      - name: Check what the domain is actually serving
+        id: smoke
+        run: |
+          for attempt in $(seq 1 9); do
+            if curl -fsS --max-time 20 "https://nivavale.com/?smoke=${GITHUB_RUN_ID}" \
+              | grep -q '/_next/static/'; then
+              echo "Serving the built site."
+              echo "healthy=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Attempt ${attempt}: the built site is not being served yet; waiting 20s."
+            sleep 20
+          done
+          echo "healthy=false" >> "$GITHUB_OUTPUT"
+          echo "::warning::nivavale.com is serving something other than this build. Re-asserting the deployment."
+
+      - name: Re-assert this deployment
+        if: steps.smoke.outputs.healthy != 'true'
+        uses: actions/deploy-pages@v4
+
+      - name: Confirm the site recovered
+        if: steps.smoke.outputs.healthy != 'true'
+        run: |
+          for attempt in $(seq 1 9); do
+            if curl -fsS --max-time 20 "https://nivavale.com/?smoke=${GITHUB_RUN_ID}" \
+              | grep -q '/_next/static/'; then
+              echo "Recovered: the built site is live."
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "::error::nivavale.com is still not serving this build. Set Settings -> Pages -> Build and deployment -> Source to 'GitHub Actions'."
+          exit 1
+
