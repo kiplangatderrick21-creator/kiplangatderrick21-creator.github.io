@@ -59,6 +59,12 @@ Standalone copies for reports, email signatures, business cards, and presentatio
 lockup files set the wordmark in Cormorant Garamond with a Georgia fallback; the on-page lockup always
 uses the self-hosted webfont.
 
+`public/brand/nivavale-avatar-1080.png` is the raster version for places that cannot take an SVG — a
+social avatar for WhatsApp, LinkedIn, and Instagram. It is a 1080×1080 tile of Deep Forest Green with
+the Warm Ivory mark at 59% of the tile, which keeps it clear of the circular crop those platforms
+apply. It was rendered from the same vector geometry (see [Open Graph card](#open-graph-card) for the
+method), so it stays sharp at every size those platforms display.
+
 ### Open Graph card
 
 `app/opengraph-image.png` is the social sharing card: deep forest green, a gold hairline, the lattice
