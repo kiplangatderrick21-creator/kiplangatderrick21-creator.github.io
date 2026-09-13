@@ -1,26 +1,35 @@
 import { technologyStack } from '@/lib/content';
 import Button from '../ui/Button';
-import SectionHeading from '../ui/SectionHeading';
 import Container from '../layout/Container';
+import SectionHeading from '../ui/SectionHeading';
 
+/**
+ * Technology, presented as a specification sheet.
+ *
+ * Eight capabilities in a hairline grid, each named and described in one line.
+ * Understated by construction: the discipline is in the structure, not in the
+ * decoration.
+ */
 export default function TechnologyPreview() {
   return (
-    <section className="bg-paper py-24 sm:py-28">
-      <Container className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+    <section className="bg-ivory-200 py-24 sm:py-28">
+      <Container className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
         <SectionHeading
           eyebrow="Technology & systems"
           title="Engineering built for research"
           description="A technology philosophy centered on Python, reproducibility, and dependable data infrastructure."
         />
+
         <div>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <dl className="grid gap-px overflow-hidden rounded-xs border border-rule bg-rule sm:grid-cols-2">
             {technologyStack.map((item) => (
-              <div key={item.title} className="rounded-sm border border-ink-200 bg-white p-5">
-                <h3 className="font-serif text-base text-ink-900">{item.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink-600">{item.description}</p>
+              <div key={item.title} className="bg-ivory-50 p-5 sm:p-6">
+                <dt className="font-display text-lg leading-snug text-forest-900">{item.title}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{item.description}</dd>
               </div>
             ))}
-          </div>
+          </dl>
+
           <Button href="/technology" variant="secondary" withArrow className="mt-8">
             Our technology approach
           </Button>

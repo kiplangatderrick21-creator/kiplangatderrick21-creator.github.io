@@ -35,11 +35,19 @@ const emptyForm: FormFields = {
 };
 
 const inputClass =
-  'w-full rounded-sm border border-ink-300 bg-white px-4 py-3 text-ink-900 placeholder:text-ink-400 focus:border-accent';
+  'w-full rounded-xs border border-rule-strong bg-white px-4 py-3 text-ink placeholder:text-ink-muted focus:border-forest-900';
 
-const errorClass = 'mt-1.5 text-sm text-red-600';
+const errorClass = 'mt-1.5 text-sm text-red-700';
 
-const inlineLinkClass = 'font-medium text-accent-600 transition-colors hover:text-accent';
+const inlineLinkClass =
+  'font-medium text-forest-900 underline decoration-gold-400/60 underline-offset-2 transition-colors hover:text-gold-700';
+
+const labelClass = 'mb-1.5 block text-sm font-medium text-ink';
+
+const requiredMarkClass = 'text-gold-700';
+
+const noticeClass =
+  'rounded-xs border border-rule bg-ivory-200 px-4 py-3 text-sm text-ink';
 
 /**
  * Direct-email fallback shown whenever the form cannot deliver. mailto: works
@@ -123,8 +131,8 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-ink-900">
-            Name <span className="text-accent-600">*</span>
+          <label htmlFor="contact-name" className={labelClass}>
+            Name <span className={requiredMarkClass}>*</span>
           </label>
           <input
             id="contact-name"
@@ -146,8 +154,8 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium text-ink-900">
-            Email <span className="text-accent-600">*</span>
+          <label htmlFor="contact-email" className={labelClass}>
+            Email <span className={requiredMarkClass}>*</span>
           </label>
           <input
             id="contact-email"
@@ -171,7 +179,7 @@ export default function ContactForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="contact-org" className="mb-1.5 block text-sm font-medium text-ink-900">
+          <label htmlFor="contact-org" className={labelClass}>
             Organization
           </label>
           <input
@@ -186,7 +194,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="contact-subject" className="mb-1.5 block text-sm font-medium text-ink-900">
+          <label htmlFor="contact-subject" className={labelClass}>
             Subject
           </label>
           <input
@@ -201,8 +209,8 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium text-ink-900">
-          Message <span className="text-accent-600">*</span>
+        <label htmlFor="contact-message" className={labelClass}>
+          Message <span className={requiredMarkClass}>*</span>
         </label>
         <textarea
           id="contact-message"
@@ -224,18 +232,18 @@ export default function ContactForm() {
 
       <div aria-live="polite" role="status">
         {status === 'not-connected' && (
-          <p className="rounded-sm border border-ink-200 bg-paper-muted px-4 py-3 text-sm text-ink-700">
+          <p className={noticeClass}>
             This form is not connected to an email service yet.
             <DirectEmailLinks />
           </p>
         )}
         {status === 'success' && (
-          <p className="rounded-sm border border-ink-200 bg-paper-muted px-4 py-3 text-sm text-ink-700">
+          <p className={noticeClass}>
             Thank you — your message has been sent.
           </p>
         )}
         {status === 'error' && (
-          <p className="rounded-sm border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <p className="rounded-xs border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
             Something went wrong sending your message. Please try again.
             <DirectEmailLinks />
           </p>
@@ -261,7 +269,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="inline-flex items-center justify-center gap-2 rounded-sm bg-accent px-7 py-3.5 text-base font-medium tracking-wide text-ink-950 transition-colors duration-200 hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-2 rounded-xs bg-forest-900 px-7 py-3.5 text-base font-semibold text-on-dark transition-colors duration-200 hover:bg-forest-800 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === 'submitting' ? 'Sending…' : 'Send message'}
         </button>

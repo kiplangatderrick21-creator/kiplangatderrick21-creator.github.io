@@ -1,22 +1,25 @@
-import type { Metadata } from 'next';
-import { Fraunces, IBM_Plex_Mono, Inter } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Cormorant_Garamond, Manrope } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { site } from '@/lib/site';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const fraunces = Fraunces({
+/* Display: an editorial serif for headlines, figures, and pull quotes. */
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-fraunces',
+  variable: '--font-cormorant',
   display: 'swap',
   weight: ['400', '500', '600'],
 });
-const plex = IBM_Plex_Mono({
+
+/* Everything else: one modern, legible sans for body copy, navigation,
+   buttons, labels, and data. Keeping a single text family keeps the page
+   weight low and the voice consistent. */
+const manrope = Manrope({
   subsets: ['latin'],
-  variable: '--font-plex',
+  variable: '--font-manrope',
   display: 'swap',
-  weight: ['400', '500'],
 });
 
 export const metadata: Metadata = {
@@ -26,6 +29,7 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
+  applicationName: site.name,
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -33,7 +37,6 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
-    images: [`${site.url}/og-image.png`],
   },
   twitter: {
     card: 'summary_large_image',
@@ -46,13 +49,20 @@ export const metadata: Metadata = {
   },
 };
 
+/* Deep Forest Green mobile browser chrome, and an explicit light colour scheme
+   so form controls and scrollbars match the warm ivory surfaces. */
+export const viewport: Viewport = {
+  themeColor: '#10251D',
+  colorScheme: 'light',
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${fraunces.variable} ${plex.variable} font-sans`}>
+      <body className={`${manrope.variable} ${cormorant.variable} font-sans`}>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-sm focus:bg-ink-950 focus:px-4 focus:py-2 focus:text-ink-100"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xs focus:bg-ivory-200 focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-forest-900"
         >
           Skip to content
         </a>
@@ -63,3 +73,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

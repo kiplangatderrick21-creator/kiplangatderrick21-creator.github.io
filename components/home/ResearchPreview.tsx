@@ -1,15 +1,22 @@
 import { researchAreas } from '@/lib/content';
 import Button from '../ui/Button';
-import SectionHeading from '../ui/SectionHeading';
 import Container from '../layout/Container';
+import SectionHeading from '../ui/SectionHeading';
 
+/**
+ * Research areas, as a hairline grid.
+ *
+ * The section background is the same warm ivory as the cells, so only the
+ * dividing rules are visible. The result reads as a printed index of research
+ * areas rather than a set of products.
+ */
 export default function ResearchPreview() {
   const featured = researchAreas.slice(0, 6);
 
   return (
-    <section className="bg-white py-24 sm:py-28">
+    <section className="bg-ivory-50 py-24 sm:py-28">
       <Container>
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
             eyebrow="Research"
             title="Systematic research, from data to decision"
@@ -19,11 +26,12 @@ export default function ResearchPreview() {
             All research areas
           </Button>
         </div>
-        <div className="mt-14 grid gap-px overflow-hidden rounded-sm border border-ink-200 bg-ink-200 sm:grid-cols-2 lg:grid-cols-3">
+
+        <div className="mt-14 grid gap-px overflow-hidden rounded-xs border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((area) => (
-            <div key={area.title} className="bg-white p-6">
-              <h3 className="font-serif text-lg text-ink-900">{area.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-600">{area.description}</p>
+            <div key={area.title} className="bg-ivory-50 p-6 sm:p-7">
+              <h3 className="font-display text-xl leading-snug text-forest-900">{area.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{area.description}</p>
             </div>
           ))}
         </div>

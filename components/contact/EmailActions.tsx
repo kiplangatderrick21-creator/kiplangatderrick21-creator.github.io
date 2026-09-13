@@ -6,7 +6,7 @@ import { gmailComposeHref, mailtoHref, outlookComposeHref } from '@/lib/email';
 import { Check, Mail } from '../ui/Icon';
 
 const chipClass =
-  'inline-flex items-center gap-2 rounded-sm border border-ink-300 px-4 py-2 text-sm font-medium text-ink-900 transition-colors hover:border-accent hover:text-accent-600';
+  'inline-flex items-center gap-2 rounded-xs border border-rule-strong px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-forest-900 hover:text-forest-900';
 
 /**
  * The contact email, plus ways to reach it that do not depend on a mail client
@@ -39,13 +39,13 @@ export default function EmailActions() {
     <div className="mt-6">
       <a
         href={mailtoHref()}
-        className="inline-flex items-center gap-2 text-base font-medium text-accent-600 transition-colors hover:text-accent"
+        className="inline-flex items-center gap-2 text-base font-medium text-forest-900 transition-colors hover:text-gold-700"
       >
         <Mail className="h-5 w-5" />
         {address}
       </a>
 
-      <p className="mt-3 text-sm text-ink-600">
+      <p className="mt-3 text-sm text-ink-muted">
         If no mail app opens on this device, write to us from your webmail instead:
       </p>
 

@@ -156,6 +156,19 @@ export const technologyStack: Item[] = [
   },
 ];
 
+/**
+ * `technologyStack` grouped into the layers of the research stack, from the data
+ * at the base to the interfaces at the top. Used by the technology page's stack
+ * ledger. Every entry is a title from `technologyStack` — this only arranges
+ * existing capability, it does not add claims.
+ */
+export const technologyLayers: Array<{ label: string; items: string[] }> = [
+  { label: 'Data', items: ['Data Pipelines'] },
+  { label: 'Research environment', items: ['Research Infrastructure', 'Python'] },
+  { label: 'Systems', items: ['Algorithmic Systems', 'Backtesting', 'Automated Workflows'] },
+  { label: 'Interfaces', items: ['APIs', 'Broker Connectivity'] },
+];
+
 export const educationTopics: Item[] = [
   {
     title: 'Quantitative Finance',

@@ -1,59 +1,77 @@
 import type { Metadata } from 'next';
-import { engineeringPrinciples, technologyStack } from '@/lib/content';
-import SectionHeading from '@/components/ui/SectionHeading';
+import { engineeringPrinciples, technologyLayers, technologyStack } from '@/lib/content';
+import StackLedger from '@/components/data-viz/StackLedger';
 import Container from '@/components/layout/Container';
+import PageHero from '@/components/layout/PageHero';
+import SectionHeading from '@/components/ui/SectionHeading';
 import CTASection from '@/components/home/CTASection';
 
 export const metadata: Metadata = {
   title: 'Technology & Systems',
   description:
     'Nivavale technology philosophy: Python, data pipelines, research infrastructure, algorithmic systems, backtesting, APIs, and automated workflows.',
+  alternates: { canonical: '/technology/' },
 };
 
 export default function TechnologyPage() {
   return (
     <>
-      <section className="bg-ink-950 py-20 text-ink-100 sm:py-28">
+      <PageHero
+        eyebrow="Technology & systems"
+        title="Engineering for dependable research."
+        description="Our technology philosophy favors simple, reproducible, and reliable systems — built around Python and a disciplined approach to data and automation."
+      />
+
+      {/* The stack, documented as an ordered ledger rather than a diagram. */}
+      <section className="bg-forest-900 py-20 sm:py-24">
         <Container>
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
-            Technology & systems
-          </p>
-          <h1 className="mt-4 max-w-3xl font-serif text-4xl font-medium leading-tight sm:text-5xl">
-            Engineering for dependable research.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-300">
-            Our technology philosophy favors simple, reproducible, and reliable systems — built
-            around Python and a disciplined approach to data and automation.
-          </p>
+          <SectionHeading
+            tone="dark"
+            eyebrow="Technology stack"
+            title="The research stack"
+            description="How the layers of the stack relate to one another, from raw data at the base to the interfaces on top."
+          />
+          <StackLedger className="mt-12" layers={technologyLayers} tone="forest" />
         </Container>
       </section>
 
-      <section className="bg-white py-20 sm:py-24">
+      {/* Each discipline, described once, in a specification grid. */}
+      <section className="bg-ivory-200 py-20 sm:py-24">
         <Container>
           <SectionHeading
-            eyebrow="Technology stack"
+            eyebrow="Disciplines"
             title="Tools and systems"
             description="The technologies and system disciplines that shape how we work. We describe our approach honestly and do not imply that any specific system is operational beyond what is stated."
           />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+          <dl className="mt-12 grid gap-px overflow-hidden rounded-xs border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
             {technologyStack.map((item) => (
-              <div key={item.title} className="rounded-sm border border-ink-200 bg-white p-6">
-                <h2 className="font-serif text-base text-ink-900">{item.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-ink-600">{item.description}</p>
+              <div key={item.title} className="bg-ivory-50 p-5 sm:p-6">
+                <dt className="font-display text-lg leading-snug text-forest-900">{item.title}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{item.description}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </Container>
       </section>
 
-      <section className="bg-paper py-20 sm:py-24">
+      <section className="bg-ivory-50 py-20 sm:py-24">
         <Container>
           <SectionHeading eyebrow="Engineering principles" title="How we build" />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {engineeringPrinciples.map((item) => (
-              <div key={item.title} className="border-t border-ink-300 pt-5">
-                <h3 className="font-serif text-lg text-ink-900">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-600">{item.description}</p>
+
+          <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {engineeringPrinciples.map((item, index) => (
+              <div key={item.title} className="border-t border-rule-strong pt-5">
+                <span
+                  aria-hidden="true"
+                  className="text-[11px] font-semibold tracking-[0.2em] text-gold-600"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mt-2 font-display text-lg leading-snug text-forest-900">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.description}</p>
               </div>
             ))}
           </div>

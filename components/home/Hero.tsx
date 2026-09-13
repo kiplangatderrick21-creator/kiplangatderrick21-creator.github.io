@@ -1,63 +1,70 @@
+import LatticeGrid from '../data-viz/LatticeGrid';
+import SignalPlot from '../data-viz/SignalPlot';
 import Button from '../ui/Button';
 import Container from '../layout/Container';
-import DotGrid from '../data-viz/DotGrid';
-import LinePattern from '../data-viz/LinePattern';
+import Panel from '../ui/Panel';
 
 const domains = ['Research', 'Analytics', 'Systems'];
 
+/**
+ * Homepage hero.
+ *
+ * Deepest forest green, the lattice surface barely visible behind it, and a
+ * single instrument panel on the right so the page opens on the firm's own
+ * language — a research surface, not a photograph of a trading floor.
+ */
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-ink-950 text-ink-100">
-      <DotGrid className="absolute inset-0 text-ink-700/40" />
-      <Container className="relative grid gap-14 py-24 sm:py-32 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div className="motion-safe:animate-fade-up">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
+    <section className="relative overflow-hidden bg-forest-950">
+      <LatticeGrid className="absolute inset-0 opacity-[0.6]" tone="forest" />
+
+      <Container className="relative grid gap-16 py-24 sm:py-28 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:py-32">
+        <div className="motion-safe:animate-rise">
+          <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-gold-400">
+            <span aria-hidden="true" className="h-px w-6 bg-gold-400/60" />
             Nivavale — Quantitative Intelligence
           </p>
-          <h1 className="mt-5 font-serif text-4xl font-medium leading-[1.08] sm:text-5xl lg:text-6xl">
+
+          <h1 className="mt-6 font-display text-[2.75rem] font-medium leading-[1.05] text-on-dark sm:text-[3.5rem] lg:text-[4rem]">
             Quantitative Intelligence. Built for Better Decisions.
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-300">
+
+          <p className="mt-7 max-w-xl text-[1.0625rem] leading-relaxed text-on-dark-muted sm:text-lg">
             Nivavale is a quantitative research and technology firm. We bring together rigorous
             research, financial data, analytics, and engineering to support disciplined,
             evidence-based decisions.
           </p>
-          <div className="mt-9 flex flex-wrap gap-4">
-            <Button href="/about" size="lg" withArrow>
-              Explore our approach
+
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+            <Button href="/research" size="lg" dark withArrow>
+              Explore our research
             </Button>
-            <Button href="/research" size="lg" variant="secondary" dark>
-              View research
+            <Button href="/contact" size="lg" variant="secondary" dark>
+              Start a conversation
             </Button>
           </div>
         </div>
 
-        <div className="motion-safe:animate-fade-up" aria-hidden="true">
-          <div className="rounded-sm border border-ink-800 bg-ink-900/70 p-6 sm:p-8">
-            <div className="flex items-center justify-between border-b border-ink-800 pb-4">
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-400">
-                Approach
+        <div className="motion-safe:animate-rise">
+          <Panel
+            label="Approach"
+            tone="forest"
+            footer={
+              <span className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                {domains.map((domain) => (
+                  <span key={domain} className="uppercase tracking-[0.18em]">
+                    {domain}
+                  </span>
+                ))}
               </span>
-              <div className="flex gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-ink-700" />
-                <span className="h-2 w-2 rounded-full bg-ink-700" />
-                <span className="h-2 w-2 rounded-full bg-accent" />
-              </div>
-            </div>
-            <div className="mt-6 h-40 text-accent/70">
-              <LinePattern className="h-full w-full" />
-            </div>
-            <div className="mt-6 grid grid-cols-3 gap-3">
-              {domains.map((label) => (
-                <div
-                  key={label}
-                  className="rounded-sm border border-ink-800 px-3 py-2 text-center font-mono text-[11px] uppercase tracking-wider text-ink-300"
-                >
-                  {label}
-                </div>
-              ))}
-            </div>
-          </div>
+            }
+          >
+            <SignalPlot className="h-44 w-full sm:h-52" tone="forest" />
+            <p className="mt-6 border-t border-rule-dark pt-4 text-xs leading-relaxed text-forest-300">
+              Research, analytics, and systems, worked through one method: frame the question,
+              gather the data, test the model, and report what the evidence supports.
+            </p>
+          </Panel>
         </div>
       </Container>
     </section>

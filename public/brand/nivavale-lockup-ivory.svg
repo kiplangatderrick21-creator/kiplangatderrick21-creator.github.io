@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" width="280" height="64" fill="none" role="img" aria-label="Nivavale">
+  <title>Nivavale</title>
+  <g transform="translate(6 8)">
+    <g stroke="#E9E3D5" stroke-width="2.6" stroke-linecap="square">
+      <path d="M9 9L9 24" />
+      <path d="M9 24L9 39" />
+      <path d="M39 9L39 24" />
+      <path d="M39 24L39 39" />
+      <path d="M9 9L24 24" />
+      <path d="M24 24L39 39" />
+    </g>
+    <g fill="#E9E3D5">
+      <path d="M9 6.6L11.4 9L9 11.4L6.6 9Z" />
+      <path d="M9 21.6L11.4 24L9 26.4L6.6 24Z" />
+      <path d="M9 36.6L11.4 39L9 41.4L6.6 39Z" />
+      <path d="M24 21.6L26.4 24L24 26.4L21.6 24Z" />
+      <path d="M39 6.6L41.4 9L39 11.4L36.6 9Z" />
+      <path d="M39 21.6L41.4 24L39 26.4L36.6 24Z" />
+      <path d="M39 36.6L41.4 39L39 41.4L36.6 39Z" />
+    </g>
+  </g>
+  <text x="62" y="41" fill="#E9E3D5" font-family="Cormorant Garamond, Georgia, 'Times New Roman', serif" font-size="27" font-weight="500" letter-spacing="6.8">NIVAVALE</text>
+</svg>

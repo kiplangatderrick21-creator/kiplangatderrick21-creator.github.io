@@ -1,42 +1,100 @@
 @import "tailwindcss";
 
+/* ===========================================================================
+   Nivavale — brand design system
+   ---------------------------------------------------------------------------
+   Official palette
+     Deep Forest Green   #10251D   primary brand colour; navigation, dark
+                                   surfaces, logo, primary dark sections
+     Warm Ivory          #E9E3D5   main light backgrounds and contrast
+     Muted Antique Gold  #B59A63   restrained accents, fine borders, selected
+                                   interactive details. Never dominant.
+     Charcoal Navy       #202C35   secondary dark sections, research and data
+                                   panels
+
+   Neutrals are derived from the ivory and charcoal navy families so that text,
+   borders, and spacing stay inside the brand temperature (warm on light, cool
+   on dark). Gold is reserved for eyebrow labels, hairline rules, navigation
+   underlines, chart marks, and primary calls to action on dark surfaces.
+
+   Contrast (WCAG 2.1 AA / 1.4.11) — verified in design review:
+     ink          on ivory-200 ..... 11.4:1   body and heading text
+     ink-muted    on ivory-200 .....  5.2:1   secondary text
+     ink-muted    on ivory-100 .....  6.0:1   secondary text
+     gold-700     on ivory-100 .....  6.2:1   small gold labels on light
+     on-dark      on forest-900 .. 12.5:1   body and heading text
+     on-dark      on navy-900 .... 11.1:1   body and heading text
+     on-dark-muted on either dark ... 7.8:1 or better
+     gold-400     on forest-900 .... 6.0:1   accent text on dark
+     rule-strong  on ivory-200 .....  3.6:1   interactive borders (1.4.11)
+   =========================================================================== */
 @theme {
-  /* Dark neutrals ("ink") */
-  --color-ink-950: #0a0d12;
-  --color-ink-900: #0e131a;
-  --color-ink-800: #151b24;
-  --color-ink-700: #1e2631;
-  --color-ink-600: #2c3645;
-  --color-ink-500: #4a5568;
-  --color-ink-400: #7a8494;
-  --color-ink-300: #a6aeb9;
-  --color-ink-200: #cdd2d9;
-  --color-ink-100: #e6e8ec;
-  --color-ink-50: #f4f5f6;
+  /* ---- Deep Forest Green (primary brand colour) ---- */
+  --color-forest-950: #08150f;
+  --color-forest-900: #10251d; /* official */
+  --color-forest-800: #16332a;
+  --color-forest-700: #1d4233;
+  --color-forest-600: #27563f;
+  --color-forest-500: #35705a;
+  --color-forest-400: #5f8f79;
+  --color-forest-300: #93b3a3;
+  --color-forest-200: #c2d4ca;
+  --color-forest-100: #dee8e2;
+  --color-forest-50: #eff4f1;
 
-  /* Light warm neutrals ("paper") */
-  --color-paper: #f6f5f1;
-  --color-paper-muted: #ecebe5;
-  --color-paper-line: #dedcd3;
+  /* ---- Charcoal Navy (secondary dark, research and data surfaces) ---- */
+  --color-navy-950: #131c23;
+  --color-navy-900: #202c35; /* official */
+  --color-navy-800: #293845;
+  --color-navy-700: #364755;
+  --color-navy-600: #455869;
+  --color-navy-500: #5c7180;
+  --color-navy-400: #8698a5;
+  --color-navy-300: #afbcc5;
+  --color-navy-200: #d2dade;
+  --color-navy-100: #e7ebee;
+  --color-navy-50: #f3f5f7;
 
-  /* Accent (muted brass) */
-  --color-accent: #b08d57;
-  --color-accent-soft: #c6a36a;
-  --color-accent-600: #93743f;
+  /* ---- Warm Ivory (main light background) ---- */
+  --color-ivory-50: #fbf9f5;
+  --color-ivory-100: #f5f1e8;
+  --color-ivory-200: #e9e3d5; /* official */
+  --color-ivory-300: #dcd4c2;
+  --color-ivory-400: #c6bca5;
+  --color-ivory-500: #a99e85;
 
-  /* Typography */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  /* ---- Muted Antique Gold (accent only) ---- */
+  --color-gold-200: #f1ead9;
+  --color-gold-300: #d8c69b;
+  --color-gold-400: #b59a63; /* official */
+  --color-gold-500: #a2874c;
+  --color-gold-600: #8b7143;
+  --color-gold-700: #6d5735;
+  --color-gold-800: #55432a;
+
+  /* ---- Semantics: text and hairlines ---- */
+  --color-ink: #1c2a33; /* primary text on light surfaces */
+  --color-ink-muted: #4d5f6c; /* secondary text on light surfaces */
+  --color-rule: #d3cab5; /* decorative hairlines on light surfaces */
+  --color-rule-strong: #7d7565; /* interactive borders on light surfaces */
+  --color-on-dark: #e9e3d5; /* primary text on forest and navy surfaces */
+  --color-on-dark-muted: #b6c2bb; /* secondary text on forest and navy */
+  --color-rule-dark: #2a4a3c; /* hairlines on forest surfaces */
+  --color-rule-dark-strong: #5f8f79; /* interactive borders on forest surfaces */
+  --color-rule-navy: #33424e; /* hairlines on navy surfaces */
+
+  /* ---- Typography ---- */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     sans-serif;
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
-  --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: var(--font-cormorant), ui-serif, Georgia, "Times New Roman", serif;
 
-  /* Motion */
-  --animate-fade-up: fade-up 0.7s ease-out both;
+  /* ---- Motion (entrance only, and only where motion is welcome) ---- */
+  --animate-rise: rise 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 
-  @keyframes fade-up {
+  @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(14px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
@@ -46,27 +104,67 @@
 }
 
 @layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    background-color: var(--color-paper);
-    color: var(--color-ink-900);
+    background-color: var(--color-ivory-200);
+    color: var(--color-ink);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
-  ::selection {
-    background-color: var(--color-accent);
-    color: var(--color-ink-950);
+  /* Display headings sit on the editorial serif; optical sizing keeps the very
+     large sizes from looking thin. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-wrap: balance;
   }
 
-  /* Visible, consistent focus state for keyboard navigation. */
-  :where(a, button, input, textarea, select, summary):focus-visible {
-    outline: 2px solid var(--color-accent);
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-gold-400);
+    color: var(--color-forest-950);
+  }
+
+  /* Two-tone focus indicator for keyboard navigation. The forest ring clears
+     3:1 against ivory; the gold ring clears 3:1 against forest and navy. At
+     least one of them is therefore always visible, on every surface. */
+  :where(a, button, input, textarea, select, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline: 2px solid var(--color-gold-400);
     outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--color-forest-950);
+  }
+}
+
+/* The header is fixed to the top; keep in-page anchors clear of it. */
+@layer base {
+  :target {
+    scroll-margin-top: 6rem;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

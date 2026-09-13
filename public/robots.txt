@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# TODO: replace the domain below with your production domain.
 Sitemap: https://nivavale.com/sitemap.xml
+

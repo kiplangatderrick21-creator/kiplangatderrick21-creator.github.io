@@ -1,3 +1,4 @@
+import DisciplinesStrip from '@/components/home/DisciplinesStrip';
 import Hero from '@/components/home/Hero';
 import Capabilities from '@/components/home/Capabilities';
 import ResearchPreview from '@/components/home/ResearchPreview';
@@ -11,6 +12,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <DisciplinesStrip />
       <Capabilities />
       <ResearchPreview />
       <AnalyticsPreview />
@@ -21,3 +23,4 @@ export default function HomePage() {
     </>
   );
 }
+
