@@ -1,6 +1,6 @@
 import { educationTopics } from '@/lib/content';
 import Button from '../ui/Button';
-import Container from '../layout/Container';
+import Section from '../layout/Section';
 import SectionHeading from '../ui/SectionHeading';
 import Tag from '../ui/Tag';
 
@@ -12,29 +12,28 @@ import Tag from '../ui/Tag';
  */
 export default function EducationPreview() {
   return (
-    <section className="bg-ivory-50 py-24 sm:py-28">
-      <Container>
-        <SectionHeading
-          align="center"
-          eyebrow="Education"
-          title="Quantitative learning, taught with rigor"
-          description="Practical, institutional instruction in the methods and tools of systematic finance."
-        />
+    <Section tone="ivory-alt" labelledBy="education-preview-heading">
+      <SectionHeading
+        id="education-preview-heading"
+        align="center"
+        eyebrow="Education"
+        title="Quantitative learning, taught with rigor"
+        description="Practical, institutional instruction in the methods and tools of systematic finance."
+      />
 
-        <ul className="mx-auto mt-12 flex max-w-3xl flex-wrap justify-center gap-3">
-          {educationTopics.map((topic) => (
-            <li key={topic.title}>
-              <Tag>{topic.title}</Tag>
-            </li>
-          ))}
-        </ul>
+      <ul className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-2.5">
+        {educationTopics.map((topic) => (
+          <li key={topic.title}>
+            <Tag>{topic.title}</Tag>
+          </li>
+        ))}
+      </ul>
 
-        <div className="mt-12 text-center">
-          <Button href="/education" variant="primary" withArrow>
-            Explore education
-          </Button>
-        </div>
-      </Container>
-    </section>
+      <div className="mt-8 text-center">
+        <Button href="/education" variant="primary" withArrow>
+          Explore education
+        </Button>
+      </div>
+    </Section>
   );
 }

@@ -47,7 +47,7 @@ export default function StackLedger({
       {intro}
       <ol className={`divide-y border-y ${t.divide} ${t.rail}`}>
         {layers.map((layer, index) => (
-          <li key={layer.label} className="grid gap-4 py-6 sm:grid-cols-[13rem_1fr] sm:items-start sm:gap-8">
+          <li key={layer.label} className="grid gap-3 py-5 sm:grid-cols-[12rem_1fr] sm:items-start sm:gap-8">
             <span className="flex items-center gap-3">
               <span className={`font-display text-xl leading-none ${t.index}`}>
                 {String(index + 1).padStart(2, '0')}

@@ -54,7 +54,7 @@ export default function Header() {
       <div aria-hidden="true" className="h-px w-full bg-gold-400/35" />
 
       <div className="border-b border-rule-dark">
-        <Container className="flex h-[4.5rem] items-center justify-between gap-6">
+        <Container className="flex h-16 items-center justify-between gap-6 sm:h-[4.5rem]">
           <Link
             href="/"
             className="flex items-center text-on-dark transition-colors hover:text-gold-200"
@@ -108,7 +108,7 @@ export default function Header() {
 
       {open && (
         <div id="mobile-menu" className="border-b border-rule-dark bg-forest-950 md:hidden">
-          <Container className="py-5">
+          <Container className="py-4">
             <nav aria-label="Primary">
               <ul className="divide-y divide-rule-dark border-y border-rule-dark">
                 {nav.map((item) => {
@@ -118,7 +118,7 @@ export default function Header() {
                       <Link
                         href={item.href}
                         aria-current={active ? 'page' : undefined}
-                        className={`flex min-h-[3.5rem] items-center gap-3 py-2 font-display text-[1.5rem] ${
+                        className={`flex min-h-[3rem] items-center gap-3 py-1.5 font-display text-[1.35rem] ${
                           active ? 'text-gold-300' : 'text-on-dark'
                         }`}
                       >
@@ -137,7 +137,7 @@ export default function Header() {
               variant="primary"
               size="lg"
               dark
-              className="mt-6 w-full"
+              className="mt-5 w-full"
               onClick={() => setOpen(false)}
             >
               Contact Nivavale

@@ -2,6 +2,10 @@
  * Section header: a small gold eyebrow, the editorial display headline, and an
  * optional standfirst.
  *
+ * Used on every band of every page, so its type scale and its offset from the
+ * content below are fixed here rather than set per section: that is what keeps
+ * the pages reading as one document.
+ *
  * `tone` selects the palette for the surface the heading sits on: warm ivory
  * pages or deep forest / charcoal navy panels. Pass `id` when the surrounding
  * `<section>` references the heading with aria-labelledby.
@@ -40,7 +44,7 @@ export default function SectionHeading({
       )}
       <h2
         id={id}
-        className={`mt-4 font-display text-[2rem] font-medium leading-[1.14] sm:text-[2.4rem] ${
+        className={`mt-3.5 font-display text-[1.625rem] font-medium leading-[1.15] sm:text-[2rem] ${
           dark ? 'text-on-dark' : 'text-forest-900'
         }`}
       >
@@ -48,7 +52,7 @@ export default function SectionHeading({
       </h2>
       {description && (
         <p
-          className={`mt-4 text-[1.0625rem] leading-relaxed ${
+          className={`mt-3.5 max-w-xl text-base leading-relaxed ${
             dark ? 'text-on-dark-muted' : 'text-ink-muted'
           }`}
         >

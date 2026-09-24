@@ -1,40 +1,40 @@
 import { technologyStack } from '@/lib/content';
 import Button from '../ui/Button';
-import Container from '../layout/Container';
+import Section from '../layout/Section';
 import SectionHeading from '../ui/SectionHeading';
 
 /**
  * Technology, presented as a specification sheet.
  *
- * Eight capabilities in a hairline grid, each named and described in one line.
- * Understated by construction: the discipline is in the structure, not in the
- * decoration.
+ * Heading and grid run full width rather than as a narrow label column against a
+ * narrow body: eight capabilities then read as four cells across on a laptop
+ * instead of a tall two-column list, which is both shorter and easier to scan.
  */
 export default function TechnologyPreview() {
   return (
-    <section className="bg-ivory-200 py-24 sm:py-28">
-      <Container className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
+    <Section tone="ivory" labelledBy="technology-preview-heading">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
         <SectionHeading
+          id="technology-preview-heading"
           eyebrow="Technology & systems"
           title="Engineering built for research"
           description="A technology philosophy centered on Python, reproducibility, and dependable data infrastructure."
         />
+        <Button href="/technology" variant="secondary" withArrow className="shrink-0">
+          Our technology approach
+        </Button>
+      </div>
 
-        <div>
-          <dl className="grid gap-px overflow-hidden rounded-xs border border-rule bg-rule sm:grid-cols-2">
-            {technologyStack.map((item) => (
-              <div key={item.title} className="bg-ivory-50 p-5 sm:p-6">
-                <dt className="font-display text-lg leading-snug text-forest-900">{item.title}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{item.description}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <Button href="/technology" variant="secondary" withArrow className="mt-8">
-            Our technology approach
-          </Button>
-        </div>
-      </Container>
-    </section>
+      <dl className="mt-10 grid gap-px overflow-hidden rounded-xs border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+        {technologyStack.map((item) => (
+          <div key={item.title} className="bg-ivory-50 p-5">
+            <dt className="font-display text-base leading-snug text-forest-900 sm:text-lg">
+              {item.title}
+            </dt>
+            <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{item.description}</dd>
+          </div>
+        ))}
+      </dl>
+    </Section>
   );
 }

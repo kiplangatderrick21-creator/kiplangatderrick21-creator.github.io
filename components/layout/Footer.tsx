@@ -17,8 +17,8 @@ export default function Footer() {
     <footer className="bg-forest-950 text-on-dark-muted">
       <div aria-hidden="true" className="h-px w-full bg-gold-400/30" />
 
-      <Container className="py-16 sm:py-20">
-        <div className="grid gap-12 md:grid-cols-[1.6fr_1fr_1fr] md:gap-10">
+      <Container className="py-12 sm:py-14">
+        <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr] md:gap-10">
           <div>
             <Link
               href="/"
@@ -27,8 +27,8 @@ export default function Footer() {
             >
               <Logo markSize={26} />
             </Link>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed">{footerDescription}</p>
-            <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-forest-300">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed">{footerDescription}</p>
+            <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-forest-300">
               Research · Analytics · Technology · Education
             </p>
           </div>
@@ -37,7 +37,7 @@ export default function Footer() {
             <h2 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold-400">
               Company
             </h2>
-            <ul className="mt-5 space-y-3 text-sm">
+            <ul className="mt-4 space-y-2.5 text-sm">
               {nav.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="transition-colors hover:text-on-dark">
@@ -52,7 +52,7 @@ export default function Footer() {
             <h2 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold-400">
               Contact
             </h2>
-            <ul className="mt-5 space-y-3 text-sm">
+            <ul className="mt-4 space-y-2.5 text-sm">
               <li>
                 <Link href="/contact" className="transition-colors hover:text-on-dark">
                   Contact us
@@ -72,7 +72,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-rule-dark pt-6 text-xs sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-rule-dark pt-5 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {site.name}. All rights reserved.
           </p>

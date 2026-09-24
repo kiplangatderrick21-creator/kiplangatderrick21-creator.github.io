@@ -114,10 +114,10 @@ app/                    # Routes, layout, metadata, fonts, favicon
   icon.svg              # Favicon (logo mark on deep forest green)
   globals.css           # The whole design system: palette, type, focus, motion
 components/
-  layout/               # Header, Footer, Container, PageHero
-  ui/                   # Logo, Button, Card, Panel, SectionHeading, Tag, Icon
+  layout/               # Section, Container, PageHero, PageIndex, Header, Footer
+  ui/                   # Logo, Button, Panel, SectionHeading, Tag, Icon
   data-viz/             # LatticeGrid, SignalPlot, ExposureBars, StackLedger
-  home/                 # Homepage sections, including DisciplinesStrip
+  home/                 # Homepage bands: hero, capability index, previews, CTA
   contact/              # ContactForm, EmailActions (webmail redirects)
 lib/
   site.ts               # Site config: name, tagline, description, url, email, nav
@@ -136,12 +136,19 @@ public/
 
 | Component                     | Use it for                                                                                   |
 | ----------------------------- | -------------------------------------------------------------------------------------------- |
+| `Section`                     | Every band on every page. Owns the background tone, the vertical rhythm, and the container.   |
 | `PageHero`                    | The opening band on every interior route. Keeps all six pages identical at the top.           |
+| `PageIndex`                   | The anchor index under an interior hero, built from `PageHero`'s `links` prop.                |
 | `SectionHeading`              | Gold eyebrow + display headline + standfirst. `tone="dark"` on forest or navy surfaces.       |
 | `Panel`                       | The framed instrument surface for charts. `tone="navy"` or `tone="forest"`.                    |
 | `LatticeGrid`                 | The brand texture, as a CSS background. Control intensity with an `opacity-*` utility.        |
 | `SignalPlot` / `ExposureBars` | Decorative, unit-free figures. Always `aria-hidden`, never numeric.                           |
 | `StackLedger`                 | An ordered, hairline-ruled ledger — used for the technology stack.                            |
+
+**Layout rhythm.** Three spacing steps cover the whole site: `spacing="default"` for content
+sections, `spacing="compact"` for asides and closing bands, and `spacing="flush-top"` for a band that
+continues the one above it. Sections also carry the `id`s that the in-page index links to. Change the
+three values in `components/layout/Section.tsx` to retune the rhythm on every page at once.
 
 ## Getting started
 
